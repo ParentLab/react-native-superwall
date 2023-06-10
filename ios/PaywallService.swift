@@ -16,11 +16,11 @@ public var isActive = false;
 
 final class PaywallService {
     static var shared = PaywallService()
-    static func initPaywall(superwallApiKey:String, revenueCatApiKey:String) {
+    static func initPaywall(superwallApiKey:String, revenueCatApiKey:String, appUserID:String) {
         if !revenueCatApiKey.isEmpty {
             useRevenueCat = true;
         }
-        
+
         let options = PaywallOptions()
         // Uncomment to show debug logs
         //options.logging.level = .debug
@@ -28,10 +28,10 @@ final class PaywallService {
             //Purchases.logLevel = .debug
             Purchases.configure(
                 with: Configuration.Builder(withAPIKey: revenueCatApiKey)
-                    .with(appUserID: nil)
+                    .with(appUserID: appUserID)
                     .build()
             )
-            
+
             Purchases.shared.getCustomerInfo { (customerInfo, error) in
                 if customerInfo?.entitlements.active.isEmpty == false {
                     isActive = true;
@@ -40,7 +40,7 @@ final class PaywallService {
                 }
             }
         }
-        
+
         Paywall.configure(
             apiKey: superwallApiKey,
             delegate: shared,
@@ -68,7 +68,7 @@ extension PaywallService: PaywallDelegate {
                 }
         }
     }
-    
+
     // 2
     func restorePurchases(completion: @escaping (Bool) -> Void) {
         if (useRevenueCat) {
@@ -91,7 +91,7 @@ extension PaywallService: PaywallDelegate {
             }
         }
     }
-    
+
     // 3
     func isUserSubscribed() -> Bool {
         if (useRevenueCat) {
@@ -100,7 +100,7 @@ extension PaywallService: PaywallDelegate {
             return StoreKitService.shared.isSubscribed.value
         }
     }
-    
+
     func trackAnalyticsEvent(
         withName name: String,
         params: [String: Any]
@@ -108,4 +108,3 @@ extension PaywallService: PaywallDelegate {
         Superwall.emitter.sendEvent(withName: "superwallAnalyticsEvent", body: ["event": name, "params":params])
     }
 }
-

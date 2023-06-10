@@ -3,7 +3,7 @@ import Paywall
 
 @objc(Superwall)
 class Superwall: RCTEventEmitter {
-    
+
     public static var emitter: RCTEventEmitter!
 
       override init() {
@@ -14,14 +14,14 @@ class Superwall: RCTEventEmitter {
       open override func supportedEvents() -> [String] {
         ["superwallAnalyticsEvent"]
       }
-    
-    
-    @objc(initPaywall:revenueCatApiKey:)
-    func initPaywall(superwallApiKey:String, revenueCatApiKey:String) -> Void {
-        PaywallService.initPaywall(superwallApiKey: superwallApiKey, revenueCatApiKey: revenueCatApiKey)
+
+
+    @objc(initPaywall:revenueCatApiKey:appUserID:)
+    func initPaywall(superwallApiKey:String, revenueCatApiKey:String, appUserID:String) -> Void {
+        PaywallService.initPaywall(superwallApiKey: superwallApiKey, revenueCatApiKey: revenueCatApiKey, appUserID: appUserID)
     }
-    
-    
+
+
     @objc(trigger:resolver:rejecter:)
     func trigger(campaignName:String, resolver: @escaping RCTPromiseResolveBlock,  rejecter: @escaping RCTPromiseRejectBlock) -> Void {
         Paywall.trigger(
@@ -41,5 +41,5 @@ class Superwall: RCTEventEmitter {
         )
     }
 
-    
+
 }
