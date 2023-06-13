@@ -41,5 +41,14 @@ class Superwall: RCTEventEmitter {
         )
     }
 
+    @objc
+    func reset() -> Void {
+        PaywallService.reset();
+    }
+
+    @objc(appUserID:)
+    func identify(appUserID:String) -> Void {
+        PaywallService.identify(appUserID: appUserID);
+    }
 
 }

@@ -28,3 +28,11 @@ export function trigger(campaignName: string) {
 export function test(campaignName: string) {
   return Superwall.testTrigger(campaignName);
 }
+
+export function reset() {
+  return Superwall.reset();
+}
+
+export function identify(appUserID: string) {
+  return Superwall.identify(appUserID);
+}

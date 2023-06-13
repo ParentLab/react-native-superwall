@@ -7,6 +7,10 @@ RCT_EXTERN_METHOD(initPaywall:(NSString)superwallApiKey revenueCatApiKey:(NSStri
 
 RCT_EXTERN_METHOD(trigger:(NSString)campaignName resolver: (RCTPromiseResolveBlock)resolve rejecter: (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(reset)
+
+RCT_EXTERN_METHOD(identify:(NSString)appUserID)
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;

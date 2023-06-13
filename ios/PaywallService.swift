@@ -47,6 +47,24 @@ final class PaywallService {
             options: options
         )
     }
+
+    static func reset() {
+        Paywall.reset();
+        if (useRevenueCat) {
+            Purchases.shared.logOut { (CustomerInfo, error) in
+                // Do nothing
+            };
+        }
+    }
+
+    static func identify(appUserID:String) {
+        Paywall.identify(userId: appUserID);
+        if (useRevenueCat) {
+            Purchases.shared.logIn(appUserID) { (customerInfo, someBool, error) in
+                // Do nothing
+            }
+        }
+    }
 }
 
 // MARK: - Paywall Delegate
