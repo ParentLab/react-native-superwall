@@ -11,6 +11,8 @@ RCT_EXTERN_METHOD(reset)
 
 RCT_EXTERN_METHOD(identify:(NSString)appUserID)
 
+RCT_EXTERN_METHOD(setUserAttributes:(NSDictionary*)userAttributes)
+
 + (BOOL)requiresMainQueueSetup
 {
   return NO;

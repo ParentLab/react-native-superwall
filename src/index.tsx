@@ -36,3 +36,7 @@ export function reset() {
 export function identify(appUserID: string) {
   return Superwall.identify(appUserID);
 }
+
+export function setUserAttributes(userAttributes: { [key: string]: any }) {
+  return Superwall.setUserAttributes(userAttributes);
+}

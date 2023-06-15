@@ -51,4 +51,9 @@ class Superwall: RCTEventEmitter {
         PaywallService.identify(appUserID: appUserID);
     }
 
+    @objc(setUserAttributes:)
+    func setUserAttributes(attributes:[String:Any]) -> Void {
+        Paywall.setUserAttributes(attributes)
+    }
+
 }
