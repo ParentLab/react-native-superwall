@@ -6,7 +6,8 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-const Superwall = NativeModules.Superwall
+const Superwall = Platform.select({
+  ios: NativeModules.Superwall
   ? NativeModules.Superwall
   : new Proxy(
       {},
@@ -15,7 +16,9 @@ const Superwall = NativeModules.Superwall
           throw new Error(LINKING_ERROR);
         },
       }
-    );
+    ),
+  android: {},
+});
 
 export function initPaywall(apiKey: string, revenueCatKey: string | null, appUserID: string | null) {
   return Superwall.initPaywall(apiKey, revenueCatKey, appUserID);
